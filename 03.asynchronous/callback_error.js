@@ -9,11 +9,11 @@ db.run(
         console.error(err.message);
       }
     });
-    db.get("select name from books", function (err) {
+    db.get("SELECT name FROM books", function (err) {
       if (err) {
         console.error(err.message);
       }
-      db.run("drop table books");
+      db.run("DROP TABLE books");
       db.close();
     });
   }

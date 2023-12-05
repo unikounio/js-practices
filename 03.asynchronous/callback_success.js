@@ -9,9 +9,9 @@ db.run(
       "JSふりがなプログラミング",
       function () {
         console.log(this.lastID);
-        db.get("select * from books", function (err, row) {
-          console.log(`id: ${row.id}, title: ${row.title}`);
-          db.run("drop table books");
+        db.get("SELECT * FROM books", function (err, book) {
+          console.log(`id: ${book.id}, title: ${book.title}`);
+          db.run("DROP TABLE books");
           db.close();
         });
       }
