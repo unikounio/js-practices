@@ -8,13 +8,13 @@ db.run(
       if (err) {
         console.error(err.message);
       }
-    });
-    db.get("SELECT name FROM books", function (err) {
-      if (err) {
-        console.error(err.message);
-      }
-      db.run("DROP TABLE books");
-      db.close();
+      db.get("SELECT name FROM books", function (err) {
+        if (err) {
+          console.error(err.message);
+        }
+        db.run("DROP TABLE books");
+        db.close();
+      });
     });
   }
 );
