@@ -9,12 +9,12 @@ runPromise(
       "JSふりがなプログラミング"
     );
   })
-  .then((book) => {
-    console.log(book.lastID);
+  .then((insertedBook) => {
+    console.log(insertedBook.lastID);
     return getPromise("SELECT * FROM books");
   })
-  .then((book) => {
-    console.log(`id: ${book.id}, title: ${book.title}`);
+  .then((selectedBook) => {
+    console.log(`id: ${selectedBook.id}, title: ${selectedBook.title}`);
     return runPromise("DROP TABLE books");
   })
   .then(() => {
