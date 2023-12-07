@@ -35,10 +35,7 @@ for (
 ) {
   process.stdout.write(currentDate.day.toString().padStart(2));
 
-  if (
-    currentDate.weekday === 6 ||
-    currentDate.toISODate() === endOfMonth.toISODate()
-  ) {
+  if (currentDate.weekday === 6 || currentDate.hasSame(endOfMonth, "day")) {
     process.stdout.write("\n");
   } else {
     process.stdout.write(" ");
