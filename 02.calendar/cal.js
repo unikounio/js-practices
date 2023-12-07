@@ -9,20 +9,23 @@ const month = argv.m || today.getMonth() + 1;
 console.log(`      ${month}月 ${year}        `);
 console.log("日 月 火 水 木 金 土");
 
-const dt = DateTime.local(year, month);
-const firstDt = dt.startOf("month");
-const lastDt = dt.endOf("month");
+const selectedMonth = DateTime.local(year, month);
+const startOfMonth = selectedMonth.startOf("month");
+const endOfMonth = selectedMonth.endOf("month");
 
-process.stdout.write("   ".repeat(firstDt.weekday % 7));
+process.stdout.write("   ".repeat(startOfMonth.weekday % 7));
 
 for (
-  let current = firstDt;
-  current <= lastDt;
-  current = current.plus({ days: 1 })
+  let currentDate = startOfMonth;
+  currentDate <= endOfMonth;
+  currentDate = currentDate.plus({ days: 1 })
 ) {
-  process.stdout.write(current.day.toString().padStart(2));
+  process.stdout.write(currentDate.day.toString().padStart(2));
 
-  if (current.weekday === 6 || current.toISODate() === lastDt.toISODate()) {
+  if (
+    currentDate.weekday === 6 ||
+    currentDate.toISODate() === endOfMonth.toISODate()
+  ) {
     process.stdout.write("\n");
   } else {
     process.stdout.write(" ");
