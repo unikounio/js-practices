@@ -14,7 +14,7 @@ if (!Number.isInteger(year)) {
   process.exit(1);
 }
 
-if (month < 1 || month > 12 || !Number.isInteger(month)) {
+if (!Number.isInteger(month) || month < 1 || month > 12) {
   console.error(`cal: ${month} is neither a month number (1..12) nor a name`);
   process.exit(1);
 }
