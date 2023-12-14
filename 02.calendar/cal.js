@@ -22,20 +22,22 @@ if (month < 1 || month > 12 || !Number.isInteger(month)) {
 console.log(`      ${month}月 ${year}        `);
 console.log("日 月 火 水 木 金 土");
 
-const selectedMonth = DateTime.local(year, month);
-const startOfMonth = selectedMonth.startOf("month");
-const endOfMonth = selectedMonth.endOf("month");
+const firstDateOfMonth = DateTime.local(year, month, 1);
+const lastDateOfMonth = firstDateOfMonth.endOf("month");
 
-process.stdout.write("   ".repeat(startOfMonth.weekday % 7));
+process.stdout.write("   ".repeat(firstDateOfMonth.weekday % 7));
 
 for (
-  let currentDate = startOfMonth;
-  currentDate <= endOfMonth;
+  let currentDate = firstDateOfMonth;
+  currentDate <= lastDateOfMonth;
   currentDate = currentDate.plus({ days: 1 })
 ) {
   process.stdout.write(currentDate.day.toString().padStart(2));
 
-  if (currentDate.weekday === 6 || currentDate.hasSame(endOfMonth, "day")) {
+  if (
+    currentDate.weekday === 6 ||
+    currentDate.hasSame(lastDateOfMonth, "day")
+  ) {
     process.stdout.write("\n");
   } else {
     process.stdout.write(" ");
