@@ -1,6 +1,6 @@
 import { db, runPromise, getPromise } from "./promise_function.js";
 
-async function asyncErrorHandling() {
+const asyncErrorHandling = async () => {
   try {
     await runPromise(
       "CREATE TABLE books(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)"
@@ -17,6 +17,6 @@ async function asyncErrorHandling() {
     await runPromise("DROP TABLE books");
     db.close();
   }
-}
+};
 
 asyncErrorHandling();

@@ -1,6 +1,6 @@
 import { db, runPromise, getPromise } from "./promise_function.js";
 
-async function asyncSuccess() {
+const asyncSuccess = async () => {
   await runPromise(
     "CREATE TABLE books(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)"
   );
@@ -8,11 +8,11 @@ async function asyncSuccess() {
     "INSERT INTO books(title) VALUES(?)",
     "JSふりがなプログラミング"
   );
-  console.log(insertedBook.lastID);
-  const selectedBook = await getPromise("SELECT * FROM books");
-  console.log(`id: ${selectedBook.id}, title: ${selectedBook.title}`);
+  console.log(`id: ${insertedBook.lastID}`);
+  const book = await getPromise("SELECT * FROM books");
+  console.log(`id: ${book.id}, title: ${book.title}`);
   await runPromise("DROP TABLE books");
   db.close();
-}
+};
 
 asyncSuccess();
