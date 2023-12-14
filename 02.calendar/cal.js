@@ -3,19 +3,19 @@ import { DateTime } from "luxon";
 
 const argv = minimist(process.argv.slice(2));
 const today = new Date();
-const year = Number(argv.y) || today.getFullYear();
-const month = Number(argv.m) || today.getMonth() + 1;
+const year = argv.y ?? today.getFullYear();
+const month = argv.m ?? today.getMonth() + 1;
 
 if (!Number.isInteger(year)) {
-  console.error(`cal: not a valid year ${year}`);
+  console.error(`cal: not a valid year ${argv.y}`);
   process.exit(1);
 } else if (year < 1 || year > 9999) {
-  console.error(`cal: year \`${year}' not in range 1..9999`);
+  console.error(`cal: year \`${argv.y}' not in range 1..9999`);
   process.exit(1);
 }
 
 if (!Number.isInteger(month) || month < 1 || month > 12) {
-  console.error(`cal: ${month} is neither a month number (1..12) nor a name`);
+  console.error(`cal: ${argv.m} is neither a month number (1..12) nor a name`);
   process.exit(1);
 }
 
