@@ -12,8 +12,7 @@ db.run(
         console.log(`id: ${this.lastID}`);
         db.get("SELECT * FROM books", (_, book) => {
           console.log(`id: ${book.id}, title: ${book.title}`);
-          db.run("DROP TABLE books");
-          db.close();
+          db.run("DROP TABLE books", () => db.close());
         });
       }
     )
