@@ -1,17 +1,22 @@
 import { db, runPromise, getPromise } from "./promise_function.js";
 
 runPromise(
+  db,
   "CREATE TABLE books(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)"
 )
   .then(() =>
-    runPromise("INSERT INTO books(title) VALUES(?)", "JSふりがなプログラミング")
+    runPromise(
+      db,
+      "INSERT INTO books(title) VALUES(?)",
+      "JSふりがなプログラミング"
+    )
   )
   .then((row) => {
     console.log(`id: ${row.lastID}`);
-    return getPromise("SELECT * FROM books");
+    return getPromise(db, "SELECT * FROM books");
   })
   .then((book) => {
     console.log(`id: ${book.id}, title: ${book.title}`);
-    return runPromise("DROP TABLE books");
+    return runPromise(db, "DROP TABLE books");
   })
   .then(() => db.close());
