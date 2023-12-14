@@ -6,8 +6,8 @@ runPromise(
   .then(() =>
     runPromise("INSERT INTO books(title) VALUES(?)", "JSふりがなプログラミング")
   )
-  .then((insertedBook) => {
-    console.log(`id: ${insertedBook.lastID}`);
+  .then((row) => {
+    console.log(`id: ${row.lastID}`);
     return getPromise("SELECT * FROM books");
   })
   .then((book) => {

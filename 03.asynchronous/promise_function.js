@@ -15,11 +15,11 @@ export const runPromise = (sql, params = []) =>
 
 export const getPromise = (sql, params = []) =>
   new Promise((resolve, reject) =>
-    db.get(sql, params, (err, book) => {
+    db.get(sql, params, (err, row) => {
       if (err) {
         reject(err);
       } else {
-        resolve(book);
+        resolve(row);
       }
     })
   );
