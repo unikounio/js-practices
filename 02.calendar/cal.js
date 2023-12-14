@@ -3,8 +3,8 @@ import { DateTime } from "luxon";
 
 const argv = minimist(process.argv.slice(2));
 const today = new Date();
-const year = argv.y === undefined ? today.getFullYear() : Number(argv.y);
-const month = argv.m === undefined ? today.getMonth() + 1 : Number(argv.m);
+const year = Number(argv.y) || today.getFullYear();
+const month = Number(argv.m) || today.getMonth() + 1;
 
 if (!Number.isInteger(year)) {
   console.error(`cal: not a valid year ${year}`);
