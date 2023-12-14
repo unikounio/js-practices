@@ -1,4 +1,9 @@
-import { db, runPromise, getPromise } from "./promise_function.js";
+import {
+  db,
+  runPromise,
+  getPromise,
+  closePromise,
+} from "./promise_function.js";
 
 const asyncErrorHandling = async () => {
   try {
@@ -16,7 +21,7 @@ const asyncErrorHandling = async () => {
     console.error(err.message);
   } finally {
     await runPromise(db, "DROP TABLE books");
-    db.close();
+    closePromise(db);
   }
 };
 

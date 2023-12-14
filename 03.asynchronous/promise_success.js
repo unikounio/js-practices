@@ -1,4 +1,9 @@
-import { db, runPromise, getPromise } from "./promise_function.js";
+import {
+  db,
+  runPromise,
+  getPromise,
+  closePromise,
+} from "./promise_function.js";
 
 runPromise(
   db,
@@ -19,4 +24,4 @@ runPromise(
     console.log(`id: ${book.id}, title: ${book.title}`);
     return runPromise(db, "DROP TABLE books");
   })
-  .then(() => db.close());
+  .then(() => closePromise(db));

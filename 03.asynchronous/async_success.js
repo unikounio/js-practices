@@ -1,4 +1,9 @@
-import { db, runPromise, getPromise } from "./promise_function.js";
+import {
+  db,
+  runPromise,
+  getPromise,
+  closePromise,
+} from "./promise_function.js";
 
 const asyncSuccess = async () => {
   await runPromise(
@@ -14,7 +19,7 @@ const asyncSuccess = async () => {
   const book = await getPromise(db, "SELECT * FROM books");
   console.log(`id: ${book.id}, title: ${book.title}`);
   await runPromise(db, "DROP TABLE books");
-  db.close();
+  closePromise(db);
 };
 
 asyncSuccess();
