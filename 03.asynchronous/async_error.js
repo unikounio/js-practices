@@ -6,11 +6,11 @@ import {
 } from "./promise_function.js";
 
 const asyncErrorHandling = async () => {
+  await runPromise(
+    db,
+    "CREATE TABLE books(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)"
+  );
   try {
-    await runPromise(
-      db,
-      "CREATE TABLE books(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)"
-    );
     await runPromise(db, "INSERT INTO books(title) VALUES(?)", null);
   } catch (err) {
     console.error(err.message);
@@ -19,10 +19,9 @@ const asyncErrorHandling = async () => {
     await getPromise(db, "SELECT name FROM books");
   } catch (err) {
     console.error(err.message);
-  } finally {
-    await runPromise(db, "DROP TABLE books");
-    closePromise(db);
   }
+  await runPromise(db, "DROP TABLE books");
+  closePromise(db);
 };
 
 asyncErrorHandling();

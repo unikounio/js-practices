@@ -16,8 +16,8 @@ runPromise(
       "JSふりがなプログラミング"
     )
   )
-  .then((row) => {
-    console.log(`id: ${row.lastID}`);
+  .then((result) => {
+    console.log(`id: ${result.lastID}`);
     return getPromise(db, "SELECT * FROM books");
   })
   .then((book) => {
