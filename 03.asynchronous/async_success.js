@@ -3,7 +3,7 @@ import {
   runPromise,
   getPromise,
   closePromise,
-} from "./promise_function.js";
+} from "./sqlite_promisification.js";
 
 const asyncSuccess = async () => {
   await runPromise(
