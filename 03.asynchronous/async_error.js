@@ -12,12 +12,20 @@ await runPromise(
 try {
   await runPromise(db, "INSERT INTO books(title) VALUES(?)", null);
 } catch (err) {
-  console.error(err.message);
+  if (err.code === "SQLITE_CONSTRAINT") {
+    console.error(err.message);
+  } else {
+    throw err;
+  }
 }
 try {
   await getPromise(db, "SELECT name FROM books");
 } catch (err) {
-  console.error(err.message);
+  if (err.message.includes("no such column")) {
+    console.error(err.message);
+  } else {
+    throw err;
+  }
 }
 await runPromise(db, "DROP TABLE books");
 await closePromise(db);
