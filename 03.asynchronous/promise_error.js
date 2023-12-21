@@ -2,7 +2,7 @@ import {
   runPromise,
   getPromise,
   closePromise,
-} from "./sqlite_promisification.js";
+} from "./asynchronous_db_operations.js";
 import sqlite3 from "sqlite3";
 
 const db = new sqlite3.Database(":memory:");
@@ -13,7 +13,7 @@ runPromise(
 )
   .then(() => runPromise(db, "INSERT INTO books(title) VALUES(?)", null))
   .catch((err) => {
-    if (err.code === "SQLITE_CONSTRAINT") {
+    if (err.message.includes("NOT NULL constraint failed")) {
       console.error(err.message);
     } else {
       throw err;

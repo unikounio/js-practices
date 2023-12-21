@@ -2,7 +2,7 @@ import {
   runPromise,
   getPromise,
   closePromise,
-} from "./sqlite_promisification.js";
+} from "./asynchronous_db_operations.js";
 import sqlite3 from "sqlite3";
 
 const db = new sqlite3.Database(":memory:");
