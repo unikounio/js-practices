@@ -1,9 +1,11 @@
 import {
-  db,
   runPromise,
   getPromise,
   closePromise,
 } from "./sqlite_promisification.js";
+import sqlite3 from "sqlite3";
+
+const db = new sqlite3.Database(":memory:");
 
 await runPromise(
   db,
