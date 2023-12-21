@@ -13,8 +13,9 @@ db.run(
         if (err) {
           console.error(err.message);
         }
-        db.run("DROP TABLE books");
-        db.close();
+        db.run("DROP TABLE books", () => {
+          db.close();
+        });
       });
     });
   }
