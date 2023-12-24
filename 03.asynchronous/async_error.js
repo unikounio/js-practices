@@ -14,8 +14,12 @@ await runPromise(
 try {
   await runPromise(db, "INSERT INTO books(title) VALUES(?)", null);
 } catch (err) {
-  if (err.message.includes("NOT NULL constraint failed")) {
-    console.error(err.message);
+  if (err instanceof Error) {
+    if (err.message.includes("NOT NULL constraint failed")) {
+      console.error(err.message);
+    } else {
+      throw err;
+    }
   } else {
     throw err;
   }
@@ -23,8 +27,12 @@ try {
 try {
   await getPromise(db, "SELECT name FROM books");
 } catch (err) {
-  if (err.message.includes("no such column")) {
-    console.error(err.message);
+  if (err instanceof Error) {
+    if (err.message.includes("no such column")) {
+      console.error(err.message);
+    } else {
+      throw err;
+    }
   } else {
     throw err;
   }
