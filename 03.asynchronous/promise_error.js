@@ -13,24 +13,16 @@ runPromise(
 )
   .then(() => runPromise(db, "INSERT INTO books(title) VALUES(?)", null))
   .catch((err) => {
-    if (err instanceof Error) {
-      if (err.message.includes("NOT NULL constraint failed")) {
-        console.error(err.message);
-      } else {
-        throw err;
-      }
+    if (err instanceof Error && err.code === "SQLITE_CONSTRAINT") {
+      console.error(err.message);
     } else {
       throw err;
     }
   })
   .then(() => getPromise(db, "SELECT name FROM books"))
   .catch((err) => {
-    if (err instanceof Error) {
-      if (err.message.includes("no such column")) {
-        console.error(err.message);
-      } else {
-        throw err;
-      }
+    if (err instanceof Error && err.code === "SQLITE_ERROR") {
+      console.error(err.message);
     } else {
       throw err;
     }
