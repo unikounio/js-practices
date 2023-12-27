@@ -1,9 +1,7 @@
-//選んだメモが削除される。
 import Enquirer from "enquirer";
 import Command from "./command.js";
-import db_operator from "./db_operator.js";
 
-class DeleteMemo extends Command {
+class ReferenceMemo extends Command {
   constructor() {
     super();
   }
@@ -22,11 +20,9 @@ class DeleteMemo extends Command {
       choices: memos.map((memo) => memo.title),
     };
     const answer = await Enquirer.prompt(question);
-    await db_operator.run(
-      "DELETE FROM memos WHERE title = ?",
-      answer.memo_title
-    );
+    const chosen_memo = memos.find((memo) => memo.title === answer.memo_title);
+    console.log(chosen_memo.fullText());
   }
 }
 
-export default DeleteMemo;
+export default ReferenceMemo;
