@@ -1,4 +1,4 @@
-import MemoApp from "./memo_app.js";
+import MemoApp from "./lib/memo_app.js";
 
 const memoApp = new MemoApp();
 memoApp.run();

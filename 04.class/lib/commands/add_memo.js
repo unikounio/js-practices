@@ -1,6 +1,6 @@
 import readline from "readline";
 import Command from "./command.js";
-import DbOperator from "./db_operator.js";
+import DbOperator from "../db_operator.js";
 
 class AddMemo extends Command {
   constructor() {

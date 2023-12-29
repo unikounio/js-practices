@@ -1,8 +1,8 @@
 import minimist from "minimist";
-import AddMemo from "./add_memo.js";
-import ListMemo from "./list_memo.js";
-import ReferenceMemo from "./reference_memo.js";
-import DeleteMemo from "./delete_memo.js";
+import AddMemo from "./commands/add_memo.js";
+import ListMemo from "./commands/list_memo.js";
+import ReferenceMemo from "./commands/reference_memo.js";
+import DeleteMemo from "./commands/delete_memo.js";
 import DbOperator from "./db_operator.js";
 
 class MemoApp {

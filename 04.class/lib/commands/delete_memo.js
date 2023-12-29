@@ -1,5 +1,5 @@
 import Command from "./command.js";
-import db_operator from "./db_operator.js";
+import db_operator from "../db_operator.js";
 
 class DeleteMemo extends Command {
   constructor() {

@@ -1,6 +1,6 @@
 import Enquirer from "enquirer";
-import db_operator from "./db_operator.js";
-import Memo from "./memo.js";
+import db_operator from "../db_operator.js";
+import Memo from "../memo.js";
 
 class Command {
   constructor() {}
