@@ -1,6 +1,5 @@
 import readline from "readline";
 import Command from "./command.js";
-import DbOperator from "../db_operator.js";
 
 class AddMemo extends Command {
   constructor() {
@@ -27,7 +26,7 @@ class AddMemo extends Command {
   }
 
   #insertMemoToDb(lines) {
-    return DbOperator.run(
+    return this.runSql(
       "INSERT INTO memos (title, content) VALUES ($title, $content)",
       { $title: lines[0], $content: lines.slice(1).join("\n") }
     );
