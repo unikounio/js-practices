@@ -3,8 +3,6 @@ import db_operator from "../db_operator.js";
 import Memo from "../memo.js";
 
 class Command {
-  constructor() {}
-
   execute() {}
 
   async runSql(sql, params = []) {

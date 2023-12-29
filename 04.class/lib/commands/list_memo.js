@@ -1,10 +1,6 @@
 import Command from "./command.js";
 
 class ListMemo extends Command {
-  constructor() {
-    super();
-  }
-
   async execute() {
     const memos = await this.fetchMemos();
     if (this.checkMemosEmpty(memos)) return;
