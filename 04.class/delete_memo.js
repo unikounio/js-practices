@@ -12,7 +12,6 @@ class DeleteMemo extends Command {
       console.log("There are no memos.");
       return;
     }
-
     const answer = await this.question("delete", memos);
     await db_operator.run(
       "DELETE FROM memos WHERE title = ?",

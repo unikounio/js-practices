@@ -1,4 +1,3 @@
-//それぞれのメモの最初の行のみを表示する。
 import Command from "./command.js";
 
 class ListMemo extends Command {
@@ -12,7 +11,6 @@ class ListMemo extends Command {
       console.log("There are no memos.");
       return;
     }
-
     for (const memo of memos) {
       console.log(memo.title);
     }
