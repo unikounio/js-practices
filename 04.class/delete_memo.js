@@ -8,10 +8,7 @@ class DeleteMemo extends Command {
 
   async execute() {
     const memos = await this.fetchMemos();
-    if (memos.length === 0) {
-      console.log("There are no memos.");
-      return;
-    }
+    if (this.checkMemosEmpty(memos)) return;
     const answer = await this.question("delete", memos);
     await db_operator.run(
       "DELETE FROM memos WHERE title = ?",

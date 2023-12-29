@@ -7,10 +7,7 @@ class ListMemo extends Command {
 
   async execute() {
     const memos = await this.fetchMemos();
-    if (memos.length === 0) {
-      console.log("There are no memos.");
-      return;
-    }
+    if (this.checkMemosEmpty(memos)) return;
     for (const memo of memos) {
       console.log(memo.title);
     }
