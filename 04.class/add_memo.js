@@ -12,27 +12,34 @@ class AddMemo extends Command {
 
   async execute() {
     let lines = [];
-    //TODO:プライベートメソッドとして分けたら読みやすくなるかも
     for await (const line of this.inputReader) {
       lines.push(line);
     }
     try {
-      await DbOperator.run(
-        "INSERT INTO memos (title, content) VALUES ($title, $content)",
-        { $title: lines[0], $content: lines.slice(1).join("\n") }
-      );
+      await this.#insertMemoToDb(lines);
     } catch (error) {
       if (error instanceof Error && error.code === "SQLITE_CONSTRAINT") {
-        if (lines[0] === undefined) {
-          console.error("Input for the first line must be required.");
-        } else {
-          console.error(
-            "A memo with the same title already exists. Please use a different title."
-          );
-        }
+        this.#handleConstraintError(lines[0]);
       } else {
         throw error;
       }
+    }
+  }
+
+  #insertMemoToDb(lines) {
+    return DbOperator.run(
+      "INSERT INTO memos (title, content) VALUES ($title, $content)",
+      { $title: lines[0], $content: lines.slice(1).join("\n") }
+    );
+  }
+
+  #handleConstraintError(memo_title) {
+    if (memo_title === undefined) {
+      console.error("Input for the first line must be required.");
+    } else {
+      console.error(
+        "A memo with the same title already exists. Please use a different title."
+      );
     }
   }
 }

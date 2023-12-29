@@ -11,21 +11,28 @@ class MemoApp {
   }
 
   async run() {
-    await DbOperator.run(
-      "CREATE TABLE IF NOT EXISTS memos (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title STRING(50) UNIQUE NOT NULL, content STRING(500))"
-    );
-    let command;
-    if (this.option.l) {
-      command = new ListMemo();
-    } else if (this.option.r) {
-      command = new ReferenceMemo();
-    } else if (this.option.d) {
-      command = new DeleteMemo();
-    } else {
-      command = new AddMemo();
-    }
+    await this.#createMemosTable();
+    const command = this.#createCommand();
     await command.execute();
     await DbOperator.close();
+  }
+
+  #createMemosTable() {
+    return DbOperator.run(
+      "CREATE TABLE IF NOT EXISTS memos (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title TEXT UNIQUE NOT NULL, content TEXT)"
+    );
+  }
+
+  #createCommand() {
+    if (this.option.l) {
+      return new ListMemo();
+    } else if (this.option.r) {
+      return new ReferenceMemo();
+    } else if (this.option.d) {
+      return new DeleteMemo();
+    } else {
+      return new AddMemo();
+    }
   }
 }
 
