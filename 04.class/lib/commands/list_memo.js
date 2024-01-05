@@ -1,6 +1,10 @@
 import Command from "./command.js";
 
-class ListMemo extends Command {
+export default class ListMemo extends Command {
+  constructor(db) {
+    super(db);
+  }
+
   async execute() {
     const memos = await this.fetchMemos();
     if (this.checkMemosEmpty(memos)) return;
@@ -9,5 +13,3 @@ class ListMemo extends Command {
     }
   }
 }
-
-export default ListMemo;

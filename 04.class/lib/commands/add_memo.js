@@ -1,9 +1,9 @@
 import readline from "readline";
 import Command from "./command.js";
 
-class AddMemo extends Command {
-  constructor() {
-    super();
+export default class AddMemo extends Command {
+  constructor(db) {
+    super(db);
     this.inputReader = readline.createInterface({
       input: process.stdin,
     });
@@ -42,5 +42,3 @@ class AddMemo extends Command {
     }
   }
 }
-
-export default AddMemo;

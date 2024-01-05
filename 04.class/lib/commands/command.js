@@ -1,16 +1,19 @@
 import Enquirer from "enquirer";
-import db_operator from "../db_operator.js";
 import Memo from "../memo.js";
 
-class Command {
+export default class Command {
+  constructor(db) {
+    this.db = db;
+  }
+
   execute() {}
 
   async runSql(sql, params = []) {
-    return db_operator.run(sql, params);
+    return this.db.run(sql, params);
   }
 
   async fetchMemos() {
-    const raw_memos = await db_operator.all("SELECT * FROM memos");
+    const raw_memos = await this.db.all("SELECT * FROM memos");
     return raw_memos.map((memo) => new Memo(memo.id, memo.title, memo.content));
   }
 
@@ -32,5 +35,3 @@ class Command {
     return await Enquirer.prompt(question);
   }
 }
-
-export default Command;

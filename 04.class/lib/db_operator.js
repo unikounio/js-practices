@@ -1,6 +1,6 @@
 import sqlite3 from "sqlite3";
 
-class DbOperator {
+export default class DbOperator {
   constructor() {
     this.dbConnection = new sqlite3.Database("./memos.db");
   }
@@ -41,5 +41,3 @@ class DbOperator {
     );
   }
 }
-
-export default new DbOperator();

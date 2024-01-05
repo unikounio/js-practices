@@ -1,6 +1,10 @@
 import Command from "./command.js";
 
-class DeleteMemo extends Command {
+export default class DeleteMemo extends Command {
+  constructor(db) {
+    super(db);
+  }
+
   async execute() {
     const memos = await this.fetchMemos();
     if (this.checkMemosEmpty(memos)) return;
@@ -8,5 +12,3 @@ class DeleteMemo extends Command {
     await this.runSql("DELETE FROM memos WHERE title = ?", answer.memo_title);
   }
 }
-
-export default DeleteMemo;

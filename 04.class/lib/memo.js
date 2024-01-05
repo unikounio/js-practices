@@ -1,4 +1,4 @@
-class Memo {
+export default class Memo {
   constructor(id, title, content) {
     this.id = id;
     this.title = title;
@@ -9,5 +9,3 @@ class Memo {
     return this.title + "\n" + this.content;
   }
 }
-
-export default Memo;

@@ -1,6 +1,10 @@
 import Command from "./command.js";
 
-class ReferenceMemo extends Command {
+export default class ReferenceMemo extends Command {
+  constructor(db) {
+    super(db);
+  }
+
   async execute() {
     const memos = await this.fetchMemos();
     if (this.checkMemosEmpty(memos)) return;
@@ -9,5 +13,3 @@ class ReferenceMemo extends Command {
     console.log(chosen_memo.fullText());
   }
 }
-
-export default ReferenceMemo;
