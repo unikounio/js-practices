@@ -29,6 +29,18 @@ export default class DbOperator {
     );
   }
 
+  get(sql, params = []) {
+    return new Promise((resolve, reject) =>
+      this.dbConnection.get(sql, params, (err, row) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(row);
+        }
+      })
+    );
+  }
+
   close() {
     return new Promise((resolve, reject) =>
       this.dbConnection.close((err) => {

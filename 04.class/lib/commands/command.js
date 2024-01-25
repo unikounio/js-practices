@@ -2,18 +2,14 @@ import Enquirer from "enquirer";
 import Memo from "../memo.js";
 
 export default class Command {
-  constructor(db) {
-    this.db = db;
+  constructor(repository) {
+    this.repository = repository;
   }
 
   execute() {}
 
-  async runSql(sql, params = []) {
-    return this.db.run(sql, params);
-  }
-
   async fetchMemos() {
-    const raw_memos = await this.db.all("SELECT * FROM memos");
+    const raw_memos = await this.repository.getAll();
     return raw_memos.map((memo) => new Memo(memo.id, memo.title, memo.content));
   }
 

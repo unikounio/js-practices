@@ -2,8 +2,8 @@ import readline from "readline";
 import Command from "./command.js";
 
 export default class AddMemo extends Command {
-  constructor(db) {
-    super(db);
+  constructor(repository) {
+    super(repository);
     this.inputReader = readline.createInterface({
       input: process.stdin,
     });
@@ -15,7 +15,7 @@ export default class AddMemo extends Command {
       lines.push(line);
     }
     try {
-      await this.#insertMemoToDb(lines);
+      await this.repository.create(lines[0], lines.slice(1).join("\n"));
     } catch (error) {
       if (error instanceof Error && error.code === "SQLITE_CONSTRAINT") {
         this.#handleConstraintError(lines[0]);
@@ -23,13 +23,6 @@ export default class AddMemo extends Command {
         throw error;
       }
     }
-  }
-
-  #insertMemoToDb(lines) {
-    return this.runSql(
-      "INSERT INTO memos (title, content) VALUES ($title, $content)",
-      { $title: lines[0], $content: lines.slice(1).join("\n") }
-    );
   }
 
   #handleConstraintError(memo_title) {

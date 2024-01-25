@@ -1,8 +1,8 @@
 import Command from "./command.js";
 
 export default class ListMemo extends Command {
-  constructor(db) {
-    super(db);
+  constructor(repository) {
+    super(repository);
   }
 
   async execute() {

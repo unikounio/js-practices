@@ -1,8 +1,8 @@
 import Command from "./command.js";
 
 export default class ReferenceMemo extends Command {
-  constructor(db) {
-    super(db);
+  constructor(repository) {
+    super(repository);
   }
 
   async execute() {
